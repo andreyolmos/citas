@@ -307,14 +307,18 @@ app.post('/agendar', (req, res) => {
 
         const nuevaCita = { id: this.lastID, nombre: nombre.trim(), email: email.trim(), telefono: telefono.trim(), fecha, horario, codigo_reserva: codigo };
 
-        enviarCorreoConfirmacion(nuevaCita)
+        res.json({
+          success: true,
+          message: 'Su cita ha sido agendada correctamente. La confirmación por correo se enviará en breve.',
+          cita: nuevaCita,
+        });
+
+        void enviarCorreoConfirmacion(nuevaCita)
           .then(() => {
-            res.json({ success: true, message: 'Su cita ha sido agendada correctamente. Se envió el correo de confirmación.', cita: nuevaCita });
+            console.log('Correo de confirmación enviado para cita:', nuevaCita.id);
           })
           .catch((mailErr) => {
-            // No eliminamos la cita si falla el correo, pero informamos con mensaje claro
             console.error('Error enviando correo:', (mailErr && mailErr.message) || mailErr);
-            res.json({ success: true, message: 'Su cita ha sido agendada correctamente. No fue posible enviar el correo de confirmación — contacte soporte.', cita: nuevaCita });
           });
       });
     });
