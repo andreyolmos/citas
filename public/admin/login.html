@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Central Pecuaria - Acceso Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <p class="login-kicker">Central Pecuaria</p>
+      <h1>Acceso privado</h1>
+      <p class="login-copy">Solo el personal autorizado de logística puede ingresar al panel de atención.</p>
+      <form id="loginForm">
+        <input type="text" id="adminUser" placeholder="Usuario" value="admin" required>
+        <input type="password" id="adminPass" placeholder="Contraseña" value="admin123" required>
+        <button type="submit">Entrar</button>
+        <div id="loginMessage" class="message"></div>
+      </form>
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>

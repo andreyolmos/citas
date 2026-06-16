@@ -1,6 +1,3 @@
-const loginView = document.getElementById('loginView');
-const loginForm = document.getElementById('loginForm');
-const loginMessage = document.getElementById('loginMessage');
 const dashboardView = document.getElementById('dashboardView');
 const citasView = document.getElementById('citasView');
 const calendarView = document.getElementById('calendarView');
@@ -27,33 +24,12 @@ const blockForm = document.getElementById('blockForm');
 const blocksList = document.getElementById('blocksList');
 
 function showView(view) {
-  loginView.classList.add('hidden');
   dashboardView.classList.add('hidden');
   citasView.classList.add('hidden');
   calendarView.classList.add('hidden');
   blocksView.classList.add('hidden');
   view.classList.remove('hidden');
 }
-
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const user = document.getElementById('adminUser').value;
-  const pass = document.getElementById('adminPass').value;
-  loginMessage.textContent = 'Autenticando...';
-  try {
-    const res = await fetch('/admin/login', { method: 'POST', credentials: 'same-origin', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ username: user, password: pass }) });
-    const data = await res.json();
-    if (data.success) {
-      loginMessage.textContent = 'Bienvenido';
-      initDashboard();
-      showView(dashboardView);
-    } else {
-      loginMessage.textContent = data.message || 'Error';
-    }
-  } catch (err) {
-    loginMessage.textContent = 'Error de conexión';
-  }
-});
 
 navDashboard.addEventListener('click', () => { initDashboard(); showView(dashboardView); });
 navCitas.addEventListener('click', () => { loadCitas(); showView(citasView); });
@@ -86,7 +62,7 @@ async function loadCitas(){
   if (data.success) {
     data.citas.forEach(c => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${c.codigo_reserva || c.reserva || ''}</td><td>${c.nombre}</td><td>${c.email}</td><td>${c.telefono}</td><td>${c.fecha}</td><td>${c.horario}</td><td>${c.estado || c.status || 'activa'}</td><td><button data-id="${c.id}" class="cancelBtn">Cancelar</button> <button data-id="${c.id}" class="deleteBtn">Eliminar</button> <button data-phone="${c.telefono || ''}" data-name="${c.nombre}" data-fecha="${c.fecha}" data-horario="${c.horario}" data-reserva="${c.codigo_reserva || c.reserva || ''}" class="waBtn">WhatsApp</button></td>`;
+      tr.innerHTML = `<td>${c.codigo_reserva || c.reserva || ''}</td><td>${c.nombre}</td><td>${c.email}</td><td>${c.telefono}</td><td>${c.fecha}</td><td>${c.horario}</td><td>${c.estado || c.status || 'activa'}</td><td><button data-id="${c.id}" class="cancelBtn">Cancelar</button> <button data-id="${c.id}" class="deleteBtn">Eliminar</button></td>`;
       citasTableBody.appendChild(tr);
     });
     document.querySelectorAll('.cancelBtn').forEach(b=>b.addEventListener('click', async (e)=>{
@@ -94,26 +70,6 @@ async function loadCitas(){
     }));
     document.querySelectorAll('.deleteBtn').forEach(b=>b.addEventListener('click', async (e)=>{
       const id = e.target.dataset.id; if(confirm('Eliminar esta cita?')){ await fetch(`/admin/citas/${id}/eliminar`,{method:'POST', credentials: 'same-origin'}); loadCitas(); }
-    }));
-    // WhatsApp reminder button
-    document.querySelectorAll('.waBtn').forEach(b=>b.addEventListener('click', async (e)=>{
-      const btn = e.currentTarget;
-      const phoneRaw = btn.dataset.phone || '';
-      const phone = phoneRaw.replace(/\D/g,'');
-      if (!phone) return alert('Teléfono no válido para WhatsApp');
-      const name = btn.dataset.name || '';
-      const fecha = btn.dataset.fecha || '';
-      const horario = btn.dataset.horario || '';
-      const reserva = btn.dataset.reserva || '';
-      const text = `Hola ${name}, le recordamos su cita el ${fecha} a las ${horario}. Código de reserva: ${reserva}. Por favor responda si necesita modificarla.`;
-      try {
-        const res = await fetch('/admin/wa/send', { method: 'POST', credentials: 'same-origin', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ phone, text }) });
-        const data = await res.json();
-        if (data.success) alert('Recordatorio enviado vía ' + (data.provider || 'API'));
-        else alert('Error: ' + (data.message || 'No se pudo enviar'));
-      } catch (err) {
-        alert('Error de conexión al enviar recordatorio');
-      }
     }));
   }
 }
@@ -172,5 +128,5 @@ async function loadBlocks(){
   }
 }
 
-// Start at login view
-showView(loginView);
+initDashboard();
+showView(dashboardView);

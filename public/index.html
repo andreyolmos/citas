@@ -3,36 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agendar Cita</title>
+  <title>Central Pecuaria | Agenda de Atención</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="page">
     <header class="hero">
       <div>
-        <span class="badge">Agenda de citas</span>
-        <h1>Reserva tu cita en línea</h1>
-        <p>Selecciona fecha, horario y completa tus datos. Nosotros te enviamos la confirmación al correo.</p>
+        <span class="badge">Central Pecuaria</span>
+        <div class="brand-line">
+          <div class="brand-mark" aria-hidden="true">CP</div>
+          <div>
+            <p class="brand-kicker">Área de logística picaleña</p>
+            <h1>Agenda tu atención en línea</h1>
+          </div>
+        </div>
+        <p>Selecciona tu fecha, elige un horario disponible y completa tus datos. Este agendador está pensado para atención a usuarios, representantes y para el encargado de la bodega.</p>
       </div>
       <div class="hero-card">
-        <p><strong>Horarios disponibles</strong></p>
-        <ul>
-          <li>09:00 - 10:00</li>
-          <li>10:30 - 11:30</li>
-          <li>12:00 - 13:00</li>
-          <li>14:00 - 15:00</li>
-          <li>15:30 - 16:30</li>
-        </ul>
+        <p><strong>Central Pecuaria</strong></p>
+        <span class="hero-subtitle">Área de logística picaleña</span>
+        <p>Atención organizada, rápida y confiable para usuarios, representantes y encargado de bodega.</p>
       </div>
     </header>
 
     <main class="container">
       <section class="card form-card">
-        <h2>Agendar cita</h2>
+        <h2>Agendar atención</h2>
         <form id="appointmentForm">
-          <div class="field-group">
-            <label for="fecha">Fecha</label>
-            <input type="date" id="fecha" name="fecha" required />
+          <input type="hidden" id="fecha" name="fecha" required />
+
+          <div class="calendar-panel">
+            <div class="calendar-head">
+              <div>
+                <p class="calendar-kicker">Selecciona una fecha</p>
+                <h3 id="calendarTitle">Calendario</h3>
+              </div>
+              <div class="calendar-actions">
+                <button type="button" id="prevMonth" class="calendar-nav">‹</button>
+                <button type="button" id="nextMonth" class="calendar-nav">›</button>
+              </div>
+            </div>
+
+            <div class="calendar-legend">
+              <span><i class="legend-dot available"></i> Disponible</span>
+              <span><i class="legend-dot occupied"></i> Ocupado</span>
+              <span><i class="legend-dot past"></i> Pasado</span>
+            </div>
+
+            <div class="calendar-weekdays" aria-hidden="true">
+              <span>Lun</span>
+              <span>Mar</span>
+              <span>Mié</span>
+              <span>Jue</span>
+              <span>Vie</span>
+              <span>Sáb</span>
+              <span>Dom</span>
+            </div>
+
+            <div id="calendarGrid" class="calendar-grid" aria-label="Calendario de disponibilidad"></div>
           </div>
 
           <div class="field-group">
@@ -62,6 +91,19 @@
         </form>
       </section>
     </main>
+  </div>
+
+  <div id="successModal" class="success-modal hidden" aria-hidden="true">
+    <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+      <div class="success-faces" aria-hidden="true">
+        <span>😄</span>
+        <span>😊</span>
+        <span>😃</span>
+      </div>
+      <h3 id="successTitle">¡Cita agendada correctamente!</h3>
+      <p id="successText">Tu cita quedó registrada con éxito.</p>
+      <button type="button" id="successClose">Aceptar</button>
+    </div>
   </div>
 
   <script src="app.js"></script>

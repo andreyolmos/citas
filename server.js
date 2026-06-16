@@ -216,6 +216,11 @@ function ensureAdmin(req, res, next) {
   return res.status(401).json({ success: false, message: 'No autorizado' });
 }
 
+function ensureAdminPage(req, res, next) {
+  if (req.session && req.session.user && req.session.user.username) return next();
+  return res.redirect('/admin/login');
+}
+
 // API para login admin
 app.post('/admin/login', (req, res) => {
   const { username, password } = req.body;
@@ -235,6 +240,13 @@ app.post('/admin/login', (req, res) => {
 
 app.post('/admin/logout', (req, res) => {
   req.session.destroy(() => res.json({ success: true }));
+});
+
+app.get('/admin/login', (req, res) => {
+  if (req.session && req.session.user && req.session.user.username) {
+    return res.redirect('/admin');
+  }
+  return res.sendFile(path.join(__dirname, 'public', 'admin', 'login.html'));
 });
 
 // Endpoints principales
@@ -419,22 +431,12 @@ app.get('/admin/horarios_bloqueados', ensureAdmin, (req, res) => {
   });
 });
 
-// Enviar recordatorio WhatsApp via API (Twilio o Meta Cloud)
-app.post('/admin/wa/send', ensureAdmin, async (req, res) => {
-  const { phone, text } = req.body;
-  if (!phone || !text) return res.status(400).json({ success: false, message: 'phone y text son requeridos' });
-  try {
-    const resp = await sendWhatsApp(phone, text);
-    return res.json({ success: true, provider: process.env.WA_PROVIDER || 'twilio', resp: resp && resp.sid ? { sid: resp.sid } : { status: resp && resp.status } });
-  } catch (err) {
-    console.error('Error enviando WA:', err.message || err);
-    return res.status(500).json({ success: false, message: 'No se pudo enviar WhatsApp: ' + (err.message || err) });
-  }
-});
 
 // Admin frontend files
 app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
+  return ensureAdminPage(req, res, () => {
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
+  });
 });
 
 app.get('*', (req, res) => {
