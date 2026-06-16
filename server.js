@@ -103,6 +103,13 @@ db.get('SELECT id FROM usuarios WHERE username = ?', [ADMIN_USER], (err, row) =>
   }
 });
 
+console.log('SMTP_HOST=', process.env.SMTP_HOST);
+console.log('SMTP_PORT=', process.env.SMTP_PORT);
+console.log('SMTP_SECURE=', process.env.SMTP_SECURE);
+console.log('SMTP_USER=', process.env.SMTP_USER);
+console.log('SMTP_PASS existe=', !!process.env.SMTP_PASS);
+
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT || 587),
@@ -115,8 +122,9 @@ const transporter = nodemailer.createTransport({
 
 transporter.verify().then(() => {
   console.log('SMTP configurado correctamente.');
-}).catch((error) => {
-  console.warn('Advertencia: no se pudo verificar SMTP:', error.message);
+    }).catch((error) => {
+  console.error('SMTP ERROR COMPLETO');
+  console.error(error);
 });
 
 app.use(cors());
