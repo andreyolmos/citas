@@ -11,7 +11,7 @@ Aplicación web para agendar citas con calendario, horarios disponibles, validac
 - Validaciones en frontend y backend.
 - Guardado de citas en SQLite.
 - No permite reservar un horario ocupado.
-- Envía correo de confirmación.
+- Envía correo de confirmación al correo ingresado por el usuario.
 - API REST:
   - `POST /agendar`
   - `GET /citas/:fecha`
@@ -62,21 +62,3 @@ npm start
 3. Agregar las mismas variables de entorno.
 4. Vercel usará `vercel.json` para ejecutar el servidor.
 
-## Recordatorios por WhatsApp (opcional)
-
-La aplicación puede enviar recordatorios por WhatsApp usando Twilio o la WhatsApp Cloud API (Meta). Configure las siguientes variables de entorno según el proveedor elegido:
-
-- `WA_PROVIDER`: `twilio` o `meta`.
-
-Si usa Twilio:
-
-- `TWILIO_ACCOUNT_SID` — SID de Twilio.
-- `TWILIO_AUTH_TOKEN` — Token de Twilio.
-- `TWILIO_WHATSAPP_FROM` — Número de envío con prefijo `whatsapp:`, por ejemplo `whatsapp:+1415XXXXXXX`.
-
-Si usa WhatsApp Cloud API (Meta):
-
-- `WA_META_TOKEN` — Access token de Facebook/Meta.
-- `WA_META_PHONE_ID` — ID del número de WhatsApp Business.
-
-Nota: para enviar mensajes desde el panel admin accede a `/admin`, busca la cita y pulsa el botón "WhatsApp" para enviar un recordatorio automátizado.
