@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin - Panel de Citas</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-wrap">
+    <aside class="sidebar">
+      <h2>Panel Admin</h2>
+      <nav>
+        <ul>
+          <li><a href="#" id="nav-dashboard">Dashboard</a></li>
+          <li><a href="#" id="nav-citas">Citas</a></li>
+          <li><a href="#" id="nav-calendar">Calendario</a></li>
+          <li><a href="#" id="nav-blocks">Bloqueos</a></li>
+          <li><a href="#" id="nav-logout">Cerrar sesión</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="login" id="loginView">
+        <h3>Acceder al panel</h3>
+        <form id="loginForm">
+          <input type="text" id="adminUser" placeholder="Usuario" value="admin" required>
+          <input type="password" id="adminPass" placeholder="Contraseña" value="admin123" required>
+          <button type="submit">Entrar</button>
+          <div id="loginMessage" class="message"></div>
+        </form>
+      </div>
+
+      <section id="dashboardView" class="hidden">
+        <h3>Dashboard</h3>
+        <div class="stats">
+          <div class="stat"><strong id="statTotal">0</strong><span>Total de citas</span></div>
+          <div class="stat"><strong id="statHoy">0</strong><span>Citas hoy</span></div>
+          <div class="stat"><strong id="statProx">0</strong><span>Próximas citas</span></div>
+          <div class="stat"><strong id="statCancel">0</strong><span>Citas canceladas</span></div>
+        </div>
+      </section>
+
+      <section id="citasView" class="hidden">
+        <h3>Gestionar citas</h3>
+        <div class="controls">
+          <input id="searchQ" placeholder="Buscar por nombre, correo...">
+          <input type="date" id="searchFecha">
+          <button id="searchBtn">Buscar</button>
+        </div>
+        <table id="citasTable">
+          <thead><tr><th>Reserva</th><th>Nombre</th><th>Email</th><th>Tel</th><th>Fecha</th><th>Horario</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="calendarView" class="hidden">
+        <h3>Calendario</h3>
+        <div id="calendarGrid"></div>
+      </section>
+
+      <section id="blocksView" class="hidden">
+        <h3>Bloqueos</h3>
+        <form id="blockForm">
+          <input type="date" id="blockFecha">
+          <input id="blockHorario" placeholder="Horario (opcional)">
+          <input id="blockMotivo" placeholder="Motivo (opcional)">
+          <button type="submit">Bloquear</button>
+        </form>
+        <div id="blocksList"></div>
+      </section>
+    </main>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>

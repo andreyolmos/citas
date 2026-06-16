@@ -1,0 +1,28 @@
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{margin:0;background:#0f1724;color:#e6eef8}
+.admin-wrap{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{background:#071029;padding:2rem}
+.sidebar h2{margin:0 0 1rem}
+.sidebar nav ul{list-style:none;padding:0}
+.sidebar nav li{margin:0.75rem 0}
+.sidebar a{color:#9fb4d3;text-decoration:none}
+.main{padding:2rem}
+.hidden{display:none}
+.login{max-width:420px;background:#031225;padding:1.25rem;border-radius:12px}
+.login input{width:100%;padding:0.9rem;margin:0.5rem 0;border-radius:10px;border:1px solid #1f3050;background:#071a2b;color:#e6eef8}
+.login button{width:100%;padding:0.9rem;border-radius:10px;border:none;background:#0ea5e9;color:#022;cursor:pointer;font-weight:700}
+.message{margin-top:0.5rem}
+.stats{display:flex;gap:1rem}
+.stat{background:#07203a;padding:1rem;border-radius:12px;flex:1}
+.controls{display:flex;gap:0.5rem;margin-bottom:1rem}
+.controls input{padding:0.6rem;border-radius:8px;border:1px solid #113145;background:#071a2b;color:#e6eef8}
+.controls button{padding:0.6rem;border-radius:8px;border:none;background:#0ea5e9;color:#022}
+#citasTable{width:100%;border-collapse:collapse}
+#citasTable th,#citasTable td{padding:0.6rem;border-bottom:1px solid #0a2740}
+#calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.calendar-day{background:#031227;padding:1rem;border-radius:8px;min-height:80px}
+.calendar-day.full{background:#4ade80}
+.calendar-day.partial{background:#facc15}
+.calendar-day.empty{background:#ef4444}
+#blocksList{margin-top:1rem}
+.block-item{background:#031827;padding:0.75rem;border-radius:8px;margin-bottom:0.5rem}

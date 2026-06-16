@@ -1,0 +1,182 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f6fb;
+  color: #0e1735;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef2ff 0%, #f4f6fb 100%);
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.75rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: #3b82f6;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hero h1 {
+  margin: 1rem 0 0.75rem;
+  font-size: clamp(2.1rem, 3.5vw, 3.6rem);
+  line-height: 1.05;
+}
+
+.hero p {
+  margin: 0;
+  max-width: 42rem;
+  color: #4b5665;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.hero-card {
+  background: white;
+  border: 1px solid #d7e2fb;
+  border-radius: 28px;
+  padding: 1.75rem;
+  box-shadow: 0 28px 80px rgba(34, 63, 126, 0.08);
+}
+
+.hero-card p {
+  margin: 0 0 1rem;
+  font-weight: 700;
+  color: #0d1a3c;
+}
+
+.hero-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-card li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f1f5ff;
+  color: #344564;
+}
+
+.hero-card li:last-child {
+  border-bottom: none;
+}
+
+.container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  background: white;
+  border-radius: 30px;
+  padding: 2rem;
+  box-shadow: 0 20px 70px rgba(16, 31, 71, 0.08);
+}
+
+.form-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.9rem;
+  color: #101c3b;
+}
+
+.field-group {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 600;
+  color: #2e3a59;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 1rem 1rem;
+  border: 1px solid #d6ddea;
+  border-radius: 18px;
+  background: #f8fbff;
+  font-size: 1rem;
+  color: #12223f;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 18px;
+  background: #2563eb;
+  color: white;
+  padding: 1rem 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.message {
+  min-height: 2.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.message.success {
+  color: #0f5132;
+}
+
+.message.error {
+  color: #842029;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .hero-card,
+  .card {
+    padding: 1.5rem;
+  }
+}
